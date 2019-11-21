@@ -1,26 +1,76 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import SearchBar from './components/SearchBar';
+import ResultsList from './components/ResultsList';
+import foursquare from './apis/foursquare';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+	state = {
+		searchTerm: '',
+		results: [],
+		selectedresult: null
+	};
+
+	onFormSubmit = (searchTerm, location) => {
+		this.setState({
+			...this.state,
+      searchTerm,
+      location
+		});
+		this.submitSearch(searchTerm, location);
+	};
+
+	onVideoSelect = (video) => {
+		// Sets state for video detail
+		this.setState({ selectedVideo: video });
+	};
+
+	submitSearch = async (searchTerm, location) => {
+	
+		try {
+			const response = await foursquare
+			  .get('/search', {
+			    params: {
+            query: searchTerm,
+            // near: location
+            // near: 'San Jose CA',
+            // query:'tacos'
+			    }
+        })
+        console.log(response.data.response.venues);
+			this.setState({
+				results: response.data.response.venues,
+				selectedresult: response.data.response.venues[0]
+			});
+		} catch (e) {
+			console.log('API Failed ', e);
+		}
+	};
+
+	componentDidMount() {
+		this.submitSearch(this.state.searchTerm, this.state.location);
+	}
+
+	render() {
+		return (
+			<div className="ui container">
+				<div className="ui row">
+					<SearchBar term={this.state.searchTerm} onFormSubmit={this.onFormSubmit} />
+
+					<div className="eleven wide column">
+						Search details...
+						{/* <VideoDetail video={this.state.selectedVideo} /> */}
+					</div>
+				</div>
+				<div className="five wide column">
+          <ResultsList results={this.state.results}/>
+					{/* <VideoList
+            videos={this.state.videos}
+            onVideoSelect={this.onVideoSelect}
+          /> */}
+				</div>
+			</div>
+		);
+	}
 }
 
 export default App;
