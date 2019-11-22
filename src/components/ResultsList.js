@@ -1,6 +1,5 @@
 import React from 'react';
 import { Accordion, Card, Button, ListGroup } from 'react-bootstrap';
-// import ResultsItem from './ResultsItem';
 
 const ResultsList = ({ results }) => {
 	if (!results) return <div>Nothing found</div>;
@@ -29,18 +28,9 @@ const ResultsList = ({ results }) => {
 							</Accordion.Collapse>
 						</Card>
 					</Accordion>
-					{/* 
-				<div key={result.id}>
-					{result.name}
-					<br />
-					{result.location.address}
-					<br />
-					<hr />
-					{result.categories.map((category) => <div key={category.id}> {category.name} </div>)}
-				</div> */}
 				</div>
 			);
 		});
-	return <div className="ui relaxed divided list">{renderedList}</div>;
+	return <div>{renderedList}</div>;
 };
 export default ResultsList;
