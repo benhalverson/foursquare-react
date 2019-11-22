@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import 'typeface-roboto';
+
 import SearchBar from './components/SearchBar';
 import ResultsList from './components/ResultsList';
 import foursquare from './apis/foursquare';
@@ -7,7 +9,8 @@ class App extends Component {
 	state = {
 		searchTerm: '',
 		results: [],
-		selectedresult: null
+		selectedresult: null,
+		error: ''
 	};
 
 	onFormSubmit = (searchTerm, location) => {
@@ -19,11 +22,6 @@ class App extends Component {
 		this.submitSearch(searchTerm, location);
 	};
 
-	onVideoSelect = (result) => {
-		// Sets state for result detail
-		this.setState({ selectedresult: result });
-	};
-
 	submitSearch = async (searchTerm, location) => {
 		try {
 			const response = await foursquare.get('/search', {
@@ -31,28 +29,36 @@ class App extends Component {
 					query: searchTerm,
 					near: location
 				}
-			});
+			}).catch((err) => {
+				this.setState({
+					error: err.response.data.meta.errorDetail, 
+					results: []
+				});
+			})
+			console.log(response.data);
 			this.setState({
 				results: response.data.response.venues,
-				selectedresult: response.data.response.venues[0]
+				error: ''
 			});
 		} catch (e) {
-			console.log('API Failed ', e);
+			this.setState({error: e.message})
 		}
 	};
 
 	componentDidMount() {
 		//Used for testing
-		this.submitSearch('Money', 'Palo Alto, CA');
+		// this.submitSearch('Money', 'Palo Alto, CA');
 	}
 
 	render() {
+		 
 		return (
 			<div className="ui container">
 				<div className="ui row">
 					<SearchBar term={this.state.searchTerm} onFormSubmit={this.onFormSubmit} />
 				</div>
 				<div className="five wide column">
+					{this.state.error && <p>{this.state.error}</p>}
 					<ResultsList results={this.state.results} />
 				</div>
 			</div>
