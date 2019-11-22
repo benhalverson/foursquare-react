@@ -35,7 +35,6 @@ class App extends Component {
 					results: []
 				});
 			})
-			console.log(response.data);
 			this.setState({
 				results: response.data.response.venues,
 				error: ''
