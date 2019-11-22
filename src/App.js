@@ -13,30 +13,25 @@ class App extends Component {
 	onFormSubmit = (searchTerm, location) => {
 		this.setState({
 			...this.state,
-      searchTerm,
-      location
+			searchTerm,
+			location
 		});
 		this.submitSearch(searchTerm, location);
 	};
 
-	onVideoSelect = (video) => {
-		// Sets state for video detail
-		this.setState({ selectedVideo: video });
+	onVideoSelect = (result) => {
+		// Sets state for result detail
+		this.setState({ selectedresult: result });
 	};
 
 	submitSearch = async (searchTerm, location) => {
-	
 		try {
-			const response = await foursquare
-			  .get('/search', {
-			    params: {
-            query: searchTerm,
-            // near: location
-            // near: 'San Jose CA',
-            // query:'tacos'
-			    }
-        })
-        console.log(response.data.response.venues);
+			const response = await foursquare.get('/search', {
+				params: {
+					query: searchTerm,
+					near: location
+				}
+			});
 			this.setState({
 				results: response.data.response.venues,
 				selectedresult: response.data.response.venues[0]
@@ -47,7 +42,8 @@ class App extends Component {
 	};
 
 	componentDidMount() {
-		this.submitSearch(this.state.searchTerm, this.state.location);
+		//Used for testing
+		this.submitSearch('Money', 'Palo Alto, CA');
 	}
 
 	render() {
@@ -55,18 +51,9 @@ class App extends Component {
 			<div className="ui container">
 				<div className="ui row">
 					<SearchBar term={this.state.searchTerm} onFormSubmit={this.onFormSubmit} />
-
-					<div className="eleven wide column">
-						Search details...
-						{/* <VideoDetail video={this.state.selectedVideo} /> */}
-					</div>
 				</div>
 				<div className="five wide column">
-          <ResultsList results={this.state.results}/>
-					{/* <VideoList
-            videos={this.state.videos}
-            onVideoSelect={this.onVideoSelect}
-          /> */}
+					<ResultsList results={this.state.results} />
 				</div>
 			</div>
 		);
