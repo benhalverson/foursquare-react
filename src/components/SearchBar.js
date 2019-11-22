@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { Button, Form, Col } from 'react-bootstrap';
 class SearchBar extends Component {
 	state = {
