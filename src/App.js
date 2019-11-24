@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
-import Alert from 'react-bootstrap/Alert';
+import { Container, Row, Col, Alert } from 'react-bootstrap';
 import SearchBar from './components/SearchBar';
 import ResultsList from './components/ResultsList';
 import foursquare from './apis/foursquare';
@@ -30,7 +30,7 @@ class App extends Component {
 					params: {
 						query: searchTerm,
 						near: location,
-						limit: 25
+						limit: 10
 					}
 				})
 				.catch((err) => {
@@ -50,29 +50,33 @@ class App extends Component {
 
 	componentDidMount() {
 		//Used for testing
-		this.submitSearch('Burger King', 'Palo Alto, CA');
+		this.submitSearch('Dog Park', 'Santa Clara, CA');
 	}
 
 	render() {
 		return (
-			<div className="ui container">
-				<div className="ui row">
-					<SearchBar term={this.state.searchTerm} onFormSubmit={this.onFormSubmit} />
-				</div>
-				<div className="five wide column">
-					<Alert color="warning">{this.state.error && <p>{this.state.error}</p>}</Alert>
-					<div style={{ width: '100vh', height: '100vh' }}>
-						<WrappedMap 
+			<Container>
+				<Row>
+					<Col>
+						<SearchBar term={this.state.searchTerm} onFormSubmit={this.onFormSubmit} />
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<Alert color="warning">{this.state.error && <p>{this.state.error}</p>}</Alert>
+						<ResultsList results={this.state.results} />
+					</Col>
+					<Col>
+						<WrappedMap
 							results={this.state.results}
 							googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${GOOGLE_APIKEY}`}
 							loadingElement={<div style={{ height: '100%' }} />}
 							containerElement={<div style={{ height: '100%' }} />}
-							mapElement={<div style={{ height: '100%' }} />}
+							mapElement={<div style={{ height: '50%', position: 'relative', top: '42px' }} />}
 						/>
-					</div>
-					<ResultsList results={this.state.results} />
-				</div>
-			</div>
+					</Col>
+				</Row>
+			</Container>
 		);
 	}
 }

@@ -10,13 +10,9 @@ Assumpitions made about Foursquare api
 - React-strap (Bootstrap) CSS framework for styling
 - React
 - Axios
-- Node.js
-- Express.js
 - Foursquare places API
 - Google maps API
 - Docker / Docker compose
-- Nginx
 - travis CI
 - Jest for unit and intregation testing
-- Puppeteer for E2E testing
-- Deployed via Docker Hub onto AWS EC2 instance 
+- Deployed to Netlify
