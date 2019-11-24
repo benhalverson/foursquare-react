@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Accordion, Card, Button, ListGroup, Alert } from 'react-bootstrap';
-import foursquare, { config } from '../apis/foursquare';
 
 const ResultsList = ({ results }) => {
 	if (!results)
