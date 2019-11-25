@@ -22,7 +22,7 @@ class SearchBar extends Component {
 			<div>
 				<Form onSubmit={this.onFormSubmit}>
 					<Form.Row>
-						<Col sm={12}>
+						<Col sm={12} md={4}>
 							<Form.Label>Search</Form.Label>
 							<Form.Control
 								required
@@ -32,7 +32,7 @@ class SearchBar extends Component {
 								onChange={this.onInputSearchChange}
 							/>
 						</Col>
-						<Col sm={12}>
+						<Col sm={12} md={4}>
 							<Form.Group controlId="search">
 								<Form.Label>Location</Form.Label>
 								<Form.Control
@@ -44,7 +44,7 @@ class SearchBar extends Component {
 								/>
 							</Form.Group>
 						</Col>
-						<Col>
+						<Col md={4}>
 							<Button variant="primary" type="submit">
 								Search
 							</Button>
