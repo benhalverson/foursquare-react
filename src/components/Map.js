@@ -11,10 +11,7 @@ const Map = ({ results }) => {
 			}
 		};
 		window.addEventListener('keydown', listener);
-
-		return () => {
-			window.removeEventListener('keydown', listener);
-		};
+		return () => window.removeEventListener('keydown', listener);
 	}, []);
 	return (
 		<GoogleMap

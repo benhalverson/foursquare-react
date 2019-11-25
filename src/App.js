@@ -49,8 +49,8 @@ class App extends Component {
 	};
 
 	componentDidMount() {
-		//Used for testing
-		this.submitSearch('Dog Park', 'Santa Clara, CA');
+		//Used for testing and setting the default city
+		this.submitSearch('', 'Santa Clara, CA');
 	}
 
 	render() {
