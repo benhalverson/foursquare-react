@@ -8,7 +8,7 @@ const ResultsList = ({ results }) => {
 				<Alert color="warning">Nothing Found!</Alert>
 			</div>
 		);
-	// Only display results that have a address, city and verifed ownership by business owner
+	// Only display results that have a address and city
 	const renderedList = results.filter((result) => result.location.address && result.location.city).map((result) => {
 		return (
 			<div key={result.id}>

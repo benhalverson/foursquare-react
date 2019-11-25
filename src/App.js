@@ -50,7 +50,7 @@ class App extends Component {
 
 	componentDidMount() {
 		//Used for testing and setting the default city
-		this.submitSearch('', 'Santa Clara, CA');
+		this.submitSearch('Dog parks', 'San Jose, CA');
 	}
 
 	render() {
@@ -62,11 +62,11 @@ class App extends Component {
 					</Col>
 				</Row>
 				<Row>
-					<Col>
+					<Col sm={12} md={6}>
 						<Alert color="warning">{this.state.error && <p>{this.state.error}</p>}</Alert>
 						<ResultsList results={this.state.results} />
 					</Col>
-					<Col>
+					<Col sm={12} md={6}>
 						<WrappedMap
 							results={this.state.results}
 							googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${GOOGLE_APIKEY}`}
