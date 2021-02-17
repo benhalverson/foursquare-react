@@ -38,6 +38,6 @@
   "devDependencies": {
     "enzyme-adapter-react-16": "1.15.6",
     "enzyme-to-json": "3.6.1",
-    "standard-version": "9.1.0"
+    "standard-version": "9.1.1"
   }
 }
