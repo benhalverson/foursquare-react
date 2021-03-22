@@ -7,9 +7,9 @@
     "bootstrap": "4.6.0",
     "enzyme": "3.11.0",
     "node-sass": "4.14.1",
-    "react": "17.0.1",
+    "react": "17.0.2",
     "react-bootstrap": "1.5.2",
-    "react-dom": "17.0.1",
+    "react-dom": "17.0.2",
     "react-google-maps": "9.4.5",
     "react-scripts": "4.0.3",
     "typeface-roboto": "1.1.13"
